@@ -11,8 +11,22 @@ const TASKS_FILE = path.join(DATA_DIR, "tasks.json");
 
 const PORT = Number(process.env.PORT || 5001);
 const ALLOWED_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
+const ROUTE_PREFIXES = [process.env.API_ROUTE_PREFIX || "", "/_/backend"]
+  .filter(Boolean)
+  .map((prefix) => (prefix.startsWith("/") ? prefix : `/${prefix}`))
+  .map((prefix) => (prefix.endsWith("/") && prefix !== "/" ? prefix.slice(0, -1) : prefix));
 const VALID_STATUSES = new Set(["Belum", "Selesai"]);
 const VALID_PRIORITIES = new Set(["Rendah", "Sedang", "Tinggi"]);
+
+function stripRoutePrefix(pathname) {
+  const matchedPrefix = ROUTE_PREFIXES.find(
+    (prefix) => prefix !== "/" && (pathname === prefix || pathname.startsWith(`${prefix}/`)),
+  );
+
+  if (!matchedPrefix) return pathname;
+
+  return pathname.slice(matchedPrefix.length) || "/";
+}
 
 class HttpError extends Error {
   constructor(statusCode, message) {
@@ -367,24 +381,25 @@ class ApiRouter {
 
   async handle(request, response) {
     const url = new URL(request.url || "/", `http://${request.headers.host}`);
-    const route = TaskRouteParser.parse(url.pathname);
+    const pathname = stripRoutePrefix(url.pathname);
+    const route = TaskRouteParser.parse(pathname);
 
     if (request.method === "OPTIONS") {
       ResponseWriter.empty(response);
       return;
     }
 
-    if (request.method === "GET" && url.pathname === "/health") {
+    if (request.method === "GET" && pathname === "/health") {
       ResponseWriter.json(response, 200, { status: "ok" });
       return;
     }
 
-    if (request.method === "GET" && url.pathname === "/tasks") {
+    if (request.method === "GET" && pathname === "/tasks") {
       ResponseWriter.json(response, 200, await this.taskService.listTasks());
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/tasks") {
+    if (request.method === "POST" && pathname === "/tasks") {
       const task = await this.taskService.createTask(await RequestBody.read(request));
       ResponseWriter.json(response, 201, task);
       return;
