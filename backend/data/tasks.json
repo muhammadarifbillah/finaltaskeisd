@@ -1,0 +1,38 @@
+[
+  {
+    "id": "fb3988ed-4443-4e59-8056-0b1ffcd4bd52",
+    "title": "BPMN",
+    "subject": "Proyek Sistem Informasi",
+    "status": "Belum",
+    "priority": "Tinggi",
+    "dueDate": "2026-05-13",
+    "notes": "Revisi BPMN To-Be pada modul pengembalian",
+    "subtasks": [],
+    "createdAt": "2026-05-12T18:56:21.907Z",
+    "updatedAt": "2026-05-12T19:00:01.386Z"
+  },
+  {
+    "id": "48e13f1e-a541-4d22-9a2f-f6d9c944b918",
+    "title": "Persiapan Assessment 2",
+    "subject": "Pengujian Perangkat Lunak",
+    "status": "Belum",
+    "priority": "Sedang",
+    "dueDate": "2026-05-14",
+    "notes": "Mempelajari Blackbox Testing dan Whitebox Testing",
+    "subtasks": [],
+    "createdAt": "2026-05-12T18:58:42.852Z",
+    "updatedAt": "2026-05-12T18:59:11.728Z"
+  },
+  {
+    "id": "f94c6799-2d3e-43a6-b803-dac4d05e96d4",
+    "title": "Persiapan Assessment 2",
+    "subject": "Pengembangan Profesionalisme",
+    "status": "Belum",
+    "priority": "Rendah",
+    "dueDate": "2026-05-14",
+    "notes": "Membuat Aplikasi untuk pencatatan jadwal dan progress belajar",
+    "subtasks": [],
+    "createdAt": "2026-05-12T19:03:16.184Z",
+    "updatedAt": "2026-05-12T19:03:16.184Z"
+  }
+]

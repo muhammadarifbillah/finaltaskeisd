@@ -16,6 +16,31 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Backend
+
+Backend Node.js tersedia di folder `backend` dan berjalan di port `5001`.
+
+```bash
+cd backend
+npm run dev
+```
+
+Endpoint utama yang dipakai frontend:
+
+- `GET http://localhost:5001/tasks`
+- `POST http://localhost:5001/tasks`
+- `PATCH http://localhost:5001/tasks/:id`
+- `DELETE http://localhost:5001/tasks/:id`
+
+Task mendukung field `title`, `subject`, `status`, `priority`, `dueDate`, dan `notes`.
+
+Fitur tambahan:
+
+- Reminder deadline untuk task hari ini dan task terlambat.
+- Halaman detail task di `/tasks/:id`.
+- Checklist subtask pada setiap task.
+- Pomodoro timer pada halaman detail task.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
